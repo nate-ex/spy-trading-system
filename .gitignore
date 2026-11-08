@@ -1,0 +1,49 @@
+# Secrets -- never commit
+.env
+*.pem
+api_keys.*
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+*.egg-info/
+.pytest_cache/
+
+# OS
+.DS_Store
+
+# Ephemeral IPC state between the dashboard and the background live-trading
+# loop -- regenerable, not an audit trail (the order/trade log IS committed,
+# see logs/README or the live_trader module docstring for why the split).
+data/live_trading/command.json
+data/live_trading/status.json
+
+# --- Data files, split off from trademas-imbalance-research-private
+# 2026-07-31. Same policy that repo used: large, regenerable-from-
+# feature_table.parquet (or from data/raw/ + build_master_dataset.py)
+# artifacts stay local-only, never pushed -- development.parquet/
+# holdout_test.parquet/feature_table.parquet are each >GitHub's 100MB
+# per-file push limit anyway.
+data/processed/feature_table.parquet
+data/processed/development.parquet
+data/processed/holdout_test.parquet
+data/processed/backtest_signals_dev.parquet
+data/processed/*.engine_fingerprint
+
+# Compare tab's autosaved table + sweep results -- session-local/
+# regenerable. NOTE: data/processed/backtests/configs/ (saved strategy
+# configs) is deliberately NOT ignored -- those get committed by
+# strategy_sync.py so a strategy saved here shows up on the next
+# `git pull` too. Order matters: broad ignore first, then the negation
+# un-ignores just that one subfolder.
+data/processed/backtests/results/
+data/processed/backtests/comparison.json
+
+# Live-dashboard session cache (accumulated across polls, regenerable,
+# not research data).
+data/live_cache/
+
+# Real market data, never committed (same policy the research repo used) --
+# regenerable via the fetch_*.py scripts / build_master_dataset.py.
+data/raw/

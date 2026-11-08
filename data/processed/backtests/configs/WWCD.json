@@ -1,0 +1,23 @@
+{
+  "name": "WWCD",
+  "entry_horizon": "5min",
+  "prob_metric": "p_touch",
+  "prob_threshold": 0.3,
+  "direction_mode": "both",
+  "require_imbalance_agreement": true,
+  "min_abs_zscore": 0.1,
+  "imbalance_direction": "any",
+  "imbalance_state": "any",
+  "time_start": "14:00",
+  "time_end": "16:00",
+  "holding_period_min": 5.0,
+  "profit_target_bps": 20.0,
+  "stop_loss_bps": 15.0,
+  "eod_exit_time": "16:00",
+  "sizing_mode": "fixed",
+  "fixed_fraction": 1.0,
+  "confidence_scale": 1.0,
+  "max_position_fraction": 1.0,
+  "max_total_exposure": 3.0,
+  "cost_bps": 0.0
+}

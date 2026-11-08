@@ -1,0 +1,20 @@
+# Fully self-contained as of the 2026-07-31 split from the sibling
+# trademas-imbalance-research-private repo -- no other repo's venv needed.
+# This is a slim list vs. that repo's requirements.txt (drops research-only
+# deps this dashboard/live-trading path never touches: polars, scipy,
+# statsmodels, scikit-learn, arch, matplotlib, seaborn, jupyterlab, xgboost).
+#
+#   python3 -m venv .venv
+#   source .venv/bin/activate
+#   pip install -r requirements.txt
+
+pandas>=2.2
+scipy>=1.13          # touch_probability_engine.py/stage1_density_engine.py/q007_skew.py distributions
+pyarrow>=17.0        # parquet I/O (development.parquet/holdout_test.parquet/backtest signals)
+plotly>=5.22         # dashboard charts
+streamlit            # dashboard UI
+alpaca-py>=0.28      # SPY/ETF bar data (live_feeds.AlpacaBarFeed) + order placement (live_trading.broker)
+python-dotenv>=1.0   # keep API keys out of source
+pytz
+requests>=2.31       # TradeMas live imbalance feed (live_feeds.TradeMasImbalanceFeed)
+pytest>=8.2
